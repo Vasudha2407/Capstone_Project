@@ -1,39 +1,22 @@
 pipeline {
-
     agent any
+
     tools {
-        maven 'Maven3'
-        jdk 'JDK21' 
+        maven 'Maven3'   // IMPORTANT LINE
     }
 
     stages {
-
         stage('Clean') {
             steps {
-                bat 'C:\\Users\\HELLO\\Downloads\\apache-maven-3.9.16-bin\\apache-maven-3.9.16\\bin\\mvn clean'
+                bat 'mvn -version'
+                bat 'mvn clean'
             }
         }
 
-        stage('Execute Tests') {
+        stage('Test') {
             steps {
-                bat 'C:\\Users\\HELLO\\Downloads\\apache-maven-3.9.16-bin\\apache-maven-3.9.16\\bin\\mvn test'
+                bat 'mvn test'
             }
-        }
-
-    }
-
-    post {
-
-        success {
-            echo 'BUILD SUCCESS'
-        }
-
-        failure {
-            echo 'BUILD FAILED'
-        }
-
-        always {
-            echo 'EXECUTION COMPLETED'
         }
     }
 }
